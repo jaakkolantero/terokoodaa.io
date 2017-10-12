@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'nosiferregular';
+    src: url('../fonts/nosifer.woff2') format('woff2'),
+         url('../fonts/nosifer.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.navbar-brand {
+  font-family: 'Peralta', cursive;
+}
+
+.breadcrumb {
+  font-family:nosiferregular;
+}
