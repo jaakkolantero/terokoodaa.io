@@ -10,8 +10,6 @@ from .models import Board
 from .models import Topic
 from .models import Post
 
-''' '''
-
 class HomeTests(TestCase):
     def setUp(self):
         self.board = Board.objects.create(name='Django', description='Django board.')
