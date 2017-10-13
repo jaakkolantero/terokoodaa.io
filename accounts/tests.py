@@ -5,6 +5,8 @@ from django.urls import resolve
 from django.test import TestCase
 from .views import signup
 
+from .forms import SignUpForm
+
 class SignUpTests(TestCase):
     def setUp(self):
         url = reverse('signup')
@@ -22,13 +24,14 @@ class SignUpTests(TestCase):
 
     def test_contains_form(self):
         form = self.response.context.get('form')
-        self.assertIsInstance(form, UserCreationForm)
+        self.assertIsInstance(form, SignUpForm)
 
 class SuccessfulSignUpTests(TestCase):
     def setUp(self):
         url = reverse('signup')
         data = {
             'username': 'john',
+            'email': 'test@test.com',
             'password1': 'abcdef123456',
             'password2': 'abcdef123456'
         }
