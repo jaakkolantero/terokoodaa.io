@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/boards.css' %}">
+{% endblock %}
+
 {% block title %}
   {{ board.name }} - {{ block.super }}
 {% endblock %}
