@@ -2,13 +2,13 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.urls import resolve
 from django.test import TestCase
-from .forms import NewTopicForm
-from .views import home
-from .views import board_topics
-from .views import new_topic
-from .models import Board
-from .models import Topic
-from .models import Post
+from ..forms import NewTopicForm
+from ..views import home
+from ..views import board_topics
+from ..views import new_topic
+from ..models import Board
+from ..models import Topic
+from ..models import Post
 
 class HomeTests(TestCase):
     def setUp(self):
