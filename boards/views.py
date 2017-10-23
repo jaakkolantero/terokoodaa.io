@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import UpdateView
+from django.views.generic import ListView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from .forms import NewTopicForm
@@ -13,9 +14,10 @@ from .models import Post
 from django.db.models import Count
 
 
-def home(request):
-    boards = Board.objects.all()
-    return render(request, 'boards/home.html', {'boards': boards})
+class BoardListView(ListView):
+    model = Board
+    context_object_name = 'boards'
+    template_name = 'boards/home.html'
 
 
 def board_topics(request, pk):
