@@ -29,7 +29,7 @@ class NewTopicTests(TestCase):
         self.assertEquals(response.status_code, 404)
 
     def test_new_topic_url_resolves_new_topic_view(self):
-        view = resolve('/boards/1/new/')
+        view = resolve('/board/1/new/')
         self.assertEquals(view.func, new_topic)
 
     def test_new_topic_view_contains_link_back_to_board_topics_view(self):

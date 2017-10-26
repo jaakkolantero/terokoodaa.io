@@ -63,7 +63,7 @@ class PostUpdateViewTests(PostUpdateViewTestCase):
         self.assertEquals(self.response.status_code, 200)
 
     def test_view_class(self):
-        view = resolve('/boards/1/topics/1/posts/1/edit/')
+        view = resolve('/board/1/topics/1/posts/1/edit/')
         self.assertEquals(view.func.view_class, PostUpdateView)
 
     def test_csrf(self):

@@ -40,7 +40,7 @@ class ReplyTopicTests(ReplyTopicTestCase):
         self.assertEquals(self.response.status_code, 200)
 
     def test_view_function(self):
-        view = resolve('/boards/1/topics/1/reply/')
+        view = resolve('/board/1/topics/1/reply/')
         self.assertEquals(view.func, reply_topic)
 
     def test_csrf(self):
