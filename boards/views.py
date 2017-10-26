@@ -58,6 +58,7 @@ class PostListView(ListView):
         queryset = self.topic.posts.order_by('created_at')
         return queryset
 
+
 @login_required
 def new_topic(request, pk):
     board = get_object_or_404(Board, pk=pk)
