@@ -84,7 +84,7 @@ class SuccessfulPasswordChangeTests(PasswordChangeTestCase):
         Create a new request to an arbitrary page.
         The resulting response should now have an `user` to its context, after a successful sign up.
         '''
-        response = self.client.get(reverse('home'))
+        response = self.client.get(reverse('board_home'))
         user = response.context.get('user')
         self.assertTrue(user.is_authenticated)
 
