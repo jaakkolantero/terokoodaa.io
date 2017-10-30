@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'robotoregular';
+    src: url('./fonts/Roboto-Regular.woff') format('woff');
+
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+  font-family:robotoregural;
+}
+
+.navbar-brand {
+  font-family: 'Source Code Pro', monospace;
+}
