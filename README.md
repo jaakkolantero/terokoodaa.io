@@ -1,5 +1,6 @@
 # terokoodaa.io/board
 
 ##TODO:
--fix forgot your password link
--create content
+
+1. fix forgot your password link
+2. create content
