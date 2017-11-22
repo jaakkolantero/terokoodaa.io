@@ -2,11 +2,149 @@
 
 {% load static %}
 {% load humanize %}
+{% load upto %}
+
+{% block stylesheet %}
+<link href="{% static 'css/resume.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block breadcrumb %}
   <li class="breadcrumb-item active">Resume</li>
 {% endblock %}
 
 {% block content %}
-  <b>RESUME</b>
+
+  <div class="container grid mb-5">
+
+    <div class="grid-item grid-item--width4"> <!-- About Me -->
+      <div class="card mb-3 mr-3" >
+        <div class="card-header">About me</div>
+        <div class="card-body" >
+          <p></p>
+          <p class="card-text">{{resume.person.about_me|linebreaks}}</p>
+        </div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+
+    <div class="grid-item grid-item--width3"> <!-- HEYTHERE -->
+      <div class="card bg-info text-white mb-3 mr-3">
+        <div class="card-body">
+          <h1 class="display-3 text-nowrap text-truncate">Hey there!</h1>
+          <p class="lead text-nowrap text-truncate">My name is {{ resume.person.first_name }} and this is my resume/cv.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-item grid-item--width1"> <!-- GITHUB -->
+      <div class="card bg-info text-white mb-3 ">
+        <div class="card-body">
+          <i class="fa fa-github fa-5x" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-item grid-item--width2"> <!-- CONTACT -->
+      <div class="card text-center mb-3 mr-3">
+        <div class="card-header">Contact</div>
+        <div class="card-body">
+          <div class="card bg-light mx-auto">
+            <div class="card-body">
+              <p class="card-text">
+                <address>
+                  {{ resume.person.first_name }} {{resume.person.last_name}}
+                  <sup><small class="text-muted " >{{ resume.person.birth_date|timesince|upto:',' }} old</small></sup> <br />
+                  {{ resume.person.street_address }} {{ resume.person.street_number }}<br />
+                  {{ resume.person.postal_code }} <br />
+                  {{ resume.person.city }} <br />
+                  <hr />
+                  <a href="tel:{{ resume.person.phone_number }}">{{ resume.person.phone_number }}</a> <br />
+                  <a href="mailto:{{ resume.person.email }}">{{ resume.person.email }}</a>
+                </address>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div> <!-- CONTACT -->
+    </div>
+
+    <div class="grid-item grid-item--width3"> <!-- SKILLS -->
+      <div class="card mb-3 mr-3">
+        <div class="card-header">Skills</div>
+        <div class="card-body">
+          {% for skill in resume.skills.all%}
+          <h4>{{ skill.name }}</h4>
+          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: {{skill.level}}%"></div>
+          <p class="card-text">{{ skill.detail }}</p>
+          {% if not forloop.last %}<hr/>{% endif %}
+          {% endfor %}
+        </div>
+      </div> <!-- SKILLS -->
+    </div>
+
+    <div class="grid-item grid-item--width1"> <!-- FACEBOOK -->
+      <div class="card bg-info text-white mb-3 ">
+        <div class="card-body">
+          <i class="fa fa-facebook-official fa-5x" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-item grid-item--width3"> <!-- EDUCATION -->
+      <div class="card mb-3 mr-3">
+        <div class="card-header">Education</div>
+        <div class="card-body">
+          {% for study in resume.studies.all %}
+            <h4>{{ study.study }} <small class="text-muted text-nowrap"> at {{ study.name }}</small></h4>
+            <p class="card-text">
+              {{ study.date_start|date:"d.m.Y" }} - {{ study.date_end|date:"d.m.Y" }}
+            </p>
+            {% if not forloop.last %}<hr/>{% endif %}
+          {% endfor %}
+        </div>
+        <div class="card-footer">Footer</div>
+      </div> <!-- EDUCATION -->
+    </div>
+
+    <div class="grid-item grid-item--width1"> <!-- TWITTER -->
+      <div class="card bg-info text-white mb-3">
+        <div class="card-body">
+          <i class="fa fa-twitter fa-5x" aria-hidden="true"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="grid-item grid-item--width3"> <!-- WORK -->
+      <div class="card mb-3 mr-3">
+        <div class="card-header">Work</div>
+        <div class="card-body">
+          {% for work in resume.works.all %}
+            <h4>{{ work.title }}<small class="text-muted"> at {{ work.name }}</small></h4>
+            <p class="card-text">
+              {{ work.date_start|date:"d.m.Y" }} - {{ work.date_end|date:"d.m.Y" }}
+            </p>
+            {% if not forloop.last %}<hr/>{% endif %}
+          {% endfor %}
+        </div>
+        <div class="card-footer"></div>
+      </div> <!-- WORK -->
+    </div>
+
+    <div class="grid-item grid-item--width2"> <!-- PICTURE -->
+      <div class="card mb-3 mr-3" >
+        <div class="card-header">picture</div>
+        <div class="card-body" >
+          <img src="{{resume.person.profile_picture.url}}" class="profile-picture"></img>
+        </div>
+        <div class="card-footer"></div>
+      </div> <!-- WORK -->
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/resume.js' %}"></script>
 {% endblock %}
