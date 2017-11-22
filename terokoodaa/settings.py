@@ -142,3 +142,6 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 
 DEFAULT_FROM_EMAIL = 'terokoodaa.io <noreply@terokoodaa.io>'
 EMAIL_SUBJECT_PREFIX = '[terokoodaa.io] '
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
