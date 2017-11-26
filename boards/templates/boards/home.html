@@ -34,7 +34,7 @@
             {% with post=board.get_last_post %}
             {% if post %}
               <small>
-                <a href="{% url 'topic_posts' board.pk post.topic.pk %}">
+                <a href="{% url 'board_topic_posts' board.pk post.topic.pk %}">
                   By {{ post.created_by.username }} at {{ post.created_at|naturaltime }}
                 </a>
               </small>

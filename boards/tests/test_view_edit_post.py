@@ -22,7 +22,7 @@ class PostUpdateViewTestCase(TestCase):
         user = User.objects.create_user(username=self.username, email='john@doe.com', password=self.password)
         self.topic = Topic.objects.create(subject='Hello, world', board=self.board, starter=user)
         self.post = Post.objects.create(message='Lorem ipsum dolor sit amet', topic=self.topic, created_by=user)
-        self.url = reverse('edit_post', kwargs={
+        self.url = reverse('board_edit_post', kwargs={
             'pk': self.board.pk,
             'topic_pk': self.topic.pk,
             'post_pk': self.post.pk
@@ -91,8 +91,8 @@ class SuccessfulPostUpdateViewTests(PostUpdateViewTestCase):
         '''
         A valid form submission should redirect the user
         '''
-        topic_posts_url = reverse('topic_posts', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
-        self.assertRedirects(self.response, topic_posts_url)
+        board_topic_posts_url = reverse('board_topic_posts', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
+        self.assertRedirects(self.response, board_topic_posts_url)
 
     def test_post_changed(self):
         self.post.refresh_from_db()
@@ -102,7 +102,7 @@ class SuccessfulPostUpdateViewTests(PostUpdateViewTestCase):
 class InvalidPostUpdateViewTests(PostUpdateViewTestCase):
     def setUp(self):
         '''
-        Submit an empty dictionary to the `reply_topic` view
+        Submit an empty dictionary to the `board_reply_topic` view
         '''
         super().setUp()
         self.client.login(username=self.username, password=self.password)

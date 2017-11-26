@@ -60,7 +60,7 @@ class PostListView(ListView):
 
 
 @login_required
-def new_topic(request, pk):
+def board_new_topic(request, pk):
     board = get_object_or_404(Board, pk=pk)
     if request.method == 'POST':
         form = NewTopicForm(request.POST)
@@ -74,14 +74,14 @@ def new_topic(request, pk):
                 topic=topic,
                 created_by=request.user
             )
-            return redirect('topic_posts', pk=pk, topic_pk=topic.pk)
+            return redirect('board_topic_posts', pk=pk, topic_pk=topic.pk)
     else:
         form = NewTopicForm()
     return render(request, 'boards/new_topic.html', {'board': board, 'form': form})
 
 
 @login_required
-def reply_topic(request, pk, topic_pk):
+def board_reply_topic(request, pk, topic_pk):
     topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -94,7 +94,7 @@ def reply_topic(request, pk, topic_pk):
             topic.last_updated = timezone.now()
             topic.save()
 
-            topic_url = reverse('topic_posts', kwargs={'pk': pk, 'topic_pk': topic_pk})
+            topic_url = reverse('board_topic_posts', kwargs={'pk': pk, 'topic_pk': topic_pk})
             topic_post_url = '{url}?page={page}#{id}'.format(
                 url=topic_url,
                 id=post.pk,
@@ -124,4 +124,4 @@ class PostUpdateView(UpdateView):
         post.updated_by = self.request.user
         post.updated_at = timezone.now()
         post.save()
-        return redirect('topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)
+        return redirect('board_topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)

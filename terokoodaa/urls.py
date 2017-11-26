@@ -56,11 +56,11 @@ urlpatterns = [
 
     url(r'^board/$', board_views.BoardListView.as_view(), name='board_home'),
     url(r'^board/(?P<pk>\d+)/$', board_views.TopicListView.as_view(), name='board_topics'),
-    url(r'^board/(?P<pk>\d+)/new/$', board_views.new_topic, name='new_topic'),
-    url(r'^board/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', board_views.PostListView.as_view(), name='topic_posts'),
-    url(r'^board/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$', board_views.reply_topic, name='reply_topic'),
+    url(r'^board/(?P<pk>\d+)/new/$', board_views.board_new_topic, name='board_new_topic'),
+    url(r'^board/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', board_views.PostListView.as_view(), name='board_topic_posts'),
+    url(r'^board/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$', board_views.board_reply_topic, name='board_reply_topic'),
     url(r'^board/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
-        board_views.PostUpdateView.as_view(), name='edit_post'),
+        board_views.PostUpdateView.as_view(), name='board_edit_post'),
 ]
 
 if settings.DEBUG:

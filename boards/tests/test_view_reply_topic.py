@@ -6,12 +6,12 @@ from ..forms import PostForm
 from ..models import Board
 from ..models import Post
 from ..models import Topic
-from ..views import reply_topic
+from ..views import board_reply_topic
 
 
 class ReplyTopicTestCase(TestCase):
     '''
-    Base test case to be used in all `reply_topic` view tests
+    Base test case to be used in all `board_reply_topic` view tests
     '''
     def setUp(self):
         self.board = Board.objects.create(name='Django', description='Django board.')
@@ -20,7 +20,7 @@ class ReplyTopicTestCase(TestCase):
         user = User.objects.create_user(username=self.username, email='john@doe.com', password=self.password)
         self.topic = Topic.objects.create(subject='Hello, world', board=self.board, starter=user)
         Post.objects.create(message='Lorem ipsum dolor sit amet', topic=self.topic, created_by=user)
-        self.url = reverse('reply_topic', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
+        self.url = reverse('board_reply_topic', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
 
 
 class LoginRequiredReplyTopicTests(ReplyTopicTestCase):
@@ -41,7 +41,7 @@ class ReplyTopicTests(ReplyTopicTestCase):
 
     def test_view_function(self):
         view = resolve('/board/1/topics/1/reply/')
-        self.assertEquals(view.func, reply_topic)
+        self.assertEquals(view.func, board_reply_topic)
 
     def test_csrf(self):
         self.assertContains(self.response, 'csrfmiddlewaretoken')
@@ -68,9 +68,9 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
         '''
         A valid form submission should redirect the user
         '''
-        url = reverse('topic_posts', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
-        topic_posts_url = '{url}?page=1#2'.format(url=url)
-        self.assertRedirects(self.response, topic_posts_url)
+        url = reverse('board_topic_posts', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
+        board_topic_posts_url = '{url}?page=1#2'.format(url=url)
+        self.assertRedirects(self.response, board_topic_posts_url)
 
     def test_reply_created(self):
         '''
@@ -84,7 +84,7 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
 class InvalidReplyTopicTests(ReplyTopicTestCase):
     def setUp(self):
         '''
-        Submit an empty dictionary to the `reply_topic` view
+        Submit an empty dictionary to the `board_reply_topic` view
         '''
         super().setUp()
         self.client.login(username=self.username, password=self.password)
