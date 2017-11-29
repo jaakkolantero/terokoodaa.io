@@ -7,6 +7,7 @@ from django.utils import timezone
 
 class Resume(models.Model):
     pub_date = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.person.first_name + " " + self.person.last_name
