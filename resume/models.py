@@ -34,6 +34,9 @@ class Person(models.Model):
 
     class Meta:
         unique_together = (('first_name', 'last_name'),)
+        permissions = (
+            ('can_view_resume', 'Can view resume'),
+        )
 
     def __str__(self):
         return self.first_name + " " + self.last_name
@@ -63,7 +66,7 @@ class Study(models.Model):
 
 class Hobby(models.Model):
     name = models.CharField(max_length=30, null=True, blank=True)
-    resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, related_name='hobbys')
+    resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, related_name='hobbies')
 
     def __str__(self):
         return self.name

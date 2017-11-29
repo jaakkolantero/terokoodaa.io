@@ -19,7 +19,9 @@
 
 
 
-.profile-picture {
-  max-width:100%;
-  object-fit:contain;
+
+img.profile-picture {
+  float: right;
+  max-width: 200px;
+  margin: 0 0 1em 1em;
 }
