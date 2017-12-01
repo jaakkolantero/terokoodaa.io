@@ -6,6 +6,7 @@ from .models import Resume
 
 @login_required
 def index(request):
+    #TODO: check only 1 is_active==True exists
     if request.user.has_perm('resume.can_view_resume'):
 
         resume = get_object_or_404(Resume, is_active=True)
