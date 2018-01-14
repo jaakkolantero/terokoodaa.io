@@ -1,6 +1,3 @@
-# terokoodaa.io/board
+# [terokoodaa.io/board](https://terokoodaa.io/board)
 
-#TODO:
-
-1. fix forgot your password link
-2. create content
+My version of [A complete Beginners guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
